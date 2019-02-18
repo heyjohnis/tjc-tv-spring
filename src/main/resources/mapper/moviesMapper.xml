@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tjcTv.dao.MoviesDao">
+
+	<select id="getMovies" resultType="tjcTv.model.MoviesVO">
+		SELECT 
+			A.ID,
+		    B.term_taxonomy_id,
+		    (select name from tjckr.wp_terms where B.term_taxonomy_id = term_id) as catagory, 
+		    A.post_title as title,
+		    A.post_content as content,
+		    A.POST_DATE as reg_date
+		FROM
+		    tjckr.wp_posts A,
+		    tjckr.wp_term_relationships B
+		WHERE
+			post_status = 'publish' AND
+		    A.ID = B.object_id
+		    and B.term_taxonomy_id in ('27')
+	</select>
+
+</mapper>
