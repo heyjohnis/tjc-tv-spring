@@ -10,9 +10,16 @@ public class MoviesVO {
 	private String title="";
 	private String content="";
 	private String reg_date="";
+	private String url="";
 	
 	List list;
 	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public List getList() {
 		return list;
 	}

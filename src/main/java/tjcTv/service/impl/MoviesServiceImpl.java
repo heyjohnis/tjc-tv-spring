@@ -1,5 +1,6 @@
 package tjcTv.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,20 @@ public class MoviesServiceImpl implements MoviesService {
 	@Override
 	public List<MoviesVO> selectMovies() {
 		List<MoviesVO> movies = dao.getMovies();
-		return movies;
+		
+		List<MoviesVO> movList = new ArrayList();
+		
+		for (MoviesVO mv : movies) {
+			String content = mv.getContent();
+			int st = content.indexOf("[embed]");
+			int et = content.indexOf("[/embed]");
+			if(st > 0 && et > 0) {
+				String url = content.substring(content.indexOf("[embed]")+7, content.indexOf("[/embed]"));
+				System.out.println("url = " + url);
+				mv.setUrl(url);
+				movList.add(mv);
+			}
+		}
+		return movList;
 	}
 }
