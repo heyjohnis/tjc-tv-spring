@@ -1,0 +1,7 @@
+2019-02-19 20:03:00.678  INFO 1268 --- [main] tjcTv.TjcTvApplication                   : Starting TjcTvApplication on Heujoons-MacBook-3.local with PID 1268 (/Users/heujoonkim/Documents/workspace/tjc-tv/target/classes started by heujoonkim in /Users/heujoonkim/Documents/workspace/tjc-tv)
+2019-02-19 20:03:00.683  INFO 1268 --- [main] tjcTv.TjcTvApplication                   : No active profile set, falling back to default profiles: default
+2019-02-19 20:03:02.633  INFO 1268 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-02-19 20:03:02.634  INFO 1268 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-02-19 20:03:02.642  INFO 1268 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/heujoonkim/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+2019-02-19 20:03:02.776  INFO 1268 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-02-19 20:03:04.334  INFO 1268 --- [main] tjcTv.TjcTvApplication                   : Started TjcTvApplication in 4.214 seconds (JVM running for 5.287)

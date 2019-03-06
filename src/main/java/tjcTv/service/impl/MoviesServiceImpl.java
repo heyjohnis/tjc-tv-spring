@@ -31,6 +31,8 @@ public class MoviesServiceImpl implements MoviesService {
 				System.out.println("url = " + url);
 				mv.setUrl(url);
 				movList.add(mv);
+				if(url.indexOf(".be/") > 0)
+					mv.setYoutube_id(url.substring(url.indexOf(".be/")+4));
 			}
 		}
 		return movList;

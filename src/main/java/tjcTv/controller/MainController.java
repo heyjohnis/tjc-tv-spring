@@ -1,6 +1,8 @@
 package tjcTv.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -25,10 +27,24 @@ public class MainController {
 	@RequestMapping(value = "/movies")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@CrossOrigin(origins = {"http://localhost:8100"}, maxAge = 4800, allowCredentials = "false") 
-	public @ResponseBody List<MoviesVO> list()  throws Exception{
+	public @ResponseBody List<MoviesVO> movieList()  throws Exception{
 		
 		List<MoviesVO> movList = service.selectMovies();
 		return movList;
 	}
+
+	@RequestMapping(value = "/login")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@CrossOrigin(origins = {"http://localhost:8100"}, maxAge = 4800, allowCredentials = "false") 
+	public @ResponseBody Map login()  throws Exception{
+		
+		Map map = new HashMap();
+		
+		map.put("status", "success");
+		map.put("user", "");
+		
+		return map;
+	}
+
 	
 }

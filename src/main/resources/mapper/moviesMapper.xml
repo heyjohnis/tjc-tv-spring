@@ -5,20 +5,67 @@
 <mapper namespace="tjcTv.dao.MoviesDao">
 
 	<select id="getMovies" resultType="tjcTv.model.MoviesVO">
-		SELECT 
-			A.ID,
-		    B.term_taxonomy_id,
-		    (select name from tjckr.wp_terms where B.term_taxonomy_id = term_id) as catagory, 
-		    A.post_title as title,
-		    A.post_content as content,
-		    A.POST_DATE as reg_date
+		SELECT
+			t.* 
 		FROM
-		    tjckr.wp_posts A,
-		    tjckr.wp_term_relationships B
-		WHERE
-			post_status = 'publish' AND
-		    A.ID = B.object_id
-		    and B.term_taxonomy_id in ('27')
+			(
+			SELECT
+				a.id,
+				b.term_taxonomy_id AS cat_cd,
+				( SELECT t.NAME FROM tjckr.wp_terms t WHERE b.term_taxonomy_id = t.term_id ) AS cat_nm,
+				a.post_title AS title,
+				a.post_content AS content,
+				a.post_date AS reg_date,
+				(
+				SELECT
+					t.meta_value 
+				FROM
+					(
+					SELECT
+						a.post_id,
+						b.meta_value 
+					FROM
+						(
+						SELECT
+							p.post_id,
+							p.meta_id,
+							p.meta_key,
+							p.meta_value 
+						FROM
+							tjckr.wp_postmeta p 
+						WHERE
+							p.meta_value IS NOT NULL 
+							AND meta_key = '_thumbnail_id' 
+						) a,
+						(
+						SELECT
+							p.post_id,
+							p.meta_id,
+							p.meta_key,
+							p.meta_value 
+						FROM
+							tjckr.wp_postmeta p 
+						WHERE
+							p.meta_value IS NOT NULL 
+							AND meta_key = '_wp_attached_file' 
+						) b 
+					WHERE
+						a.meta_value = b.post_id 
+					GROUP BY
+						a.post_id,
+						b.meta_value 
+					) t 
+				WHERE
+					post_id = a.id 
+				) AS thumbnail_src 
+			FROM
+				tjckr.wp_term_relationships b,
+				tjckr.wp_posts a 
+			WHERE
+				a.post_status = 'publish' 
+				AND a.id = b.object_id 
+			AND b.term_taxonomy_id = '27' 
+			) t
 	</select>
 
 </mapper>
